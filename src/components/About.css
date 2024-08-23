@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+body {
+    font-family: 'Playfair Display', serif;
+}
+.about-image:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #d9534f;
+  color: #fff;
+  transition: background-color 0.3s ease;
+}
