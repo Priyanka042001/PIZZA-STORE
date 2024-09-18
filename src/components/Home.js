@@ -1,35 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 
+const pizzaImages = [
+  {
+    src: 'https://lilluna.com/wp-content/uploads/2020/12/margherita-pizza-resize-3.jpg',
+    title: 'Margherita Pizza',
+    description: 'Classic cheese and tomato.',
+  },
+  {
+    src: 'https://th.bing.com/th/id/OIP._Tuj6ElUF8jhhcSg41_V_QHaE8?w=273&h=182&c=7&r=0&o=5&dpr=1.3&pid=1.7',
+    title: 'Pepperoni Pizza',
+    description: 'Spicy pepperoni with gooey cheese.',
+  },
+  {
+    src: 'https://tse3.mm.bing.net/th?id=OIP.RyF12CjDGrG3YngqLLEc2gHaHa&pid=Api&P=0&h=180',
+    title: 'Veggie Pizza',
+    description: 'Loaded with fresh vegetables.',
+  },
+  {
+    src: 'https://tse4.mm.bing.net/th?id=OIP.7ap_ux-IRoueP9OR1ou5QgHaKX&pid=Api&P=0&h=180',
+    title: 'BBQ Chicken Pizza',
+    description: 'Grilled chicken, BBQ sauce, red onions, and cilantro.',
+  },
+  {
+    src: 'https://tse2.mm.bing.net/th?id=OIP.eG4Y7DlVnM8rB4gmEPu_pgHaE8&pid=Api&P=0&h=180',
+    title: 'Four Cheese Pizza',
+    description: 'A blend of mozzarella, cheddar, parmesan, and blue cheese.',
+  },
+  {
+    src: 'https://tse3.mm.bing.net/th?id=OIP.fe50rxvAAhpsPxH5bj867QHaHa&pid=Api&P=0&h=180',
+    title: 'Hawaiian Pizza',
+    description: 'Ham, pineapple, and extra cheese for a sweet and savory combo.',
+  },
+];
+
 function Home() {
-  const [pizzaImages, setPizzaImages] = useState([]);
-  const navigate = useNavigate();
-
-  const fetchPizzas = () => {
-    axios.get('http://localhost:5000/Pizzas')
-      .then(response => {
-        setPizzaImages(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
-
-  const handleDelete = (id) => {
-    axios.delete(`http://localhost:5000/Pizzas/${id}`)
-      .then(() => {
-        fetchPizzas();
-      }).catch(error => {
-        console.log('There was an error for deleting the Pizzas', error);
-      })
-  };
-
-  useEffect(() => {
-    fetchPizzas();
-  }, []);
-
   return (
     <>
       {/* Hero Section */}
@@ -58,12 +63,12 @@ function Home() {
       {/* Intro Section */}
       <Container className="my-5">
         <Row className="align-items-center">
-          <Col xs={12} md={6}>
+          <Col xs={12} md={6} className="text-center">
             <img
               src="https://tse2.mm.bing.net/th?id=OIP.Wryt7qYmlhgJ6s8LytSRiAHaE7&pid=Api&P=0&h=180"
               alt="Pizza"
               className="img-fluid rounded mb-4 mb-md-0"
-              style={{ width: '100%', maxHeight: '500px', objectFit: 'cover' }}
+              style={{ maxWidth: '100%', maxHeight: '500px', objectFit: 'cover' }}
             />
           </Col>
           <Col xs={12} md={6}>
@@ -76,10 +81,7 @@ function Home() {
 
       {/* Pizza Gallery Section */}
       <Container className="text-center mb-5">
-        <h1 className='text-center mb-4'>Pizza Gallery</h1>
-        <button onClick={() => navigate('/addpizza')} className="btn btn-sm btn-outline-secondary mb-4">
-          Add New Pizza
-        </button>
+        <h1 className="text-center mb-4">Pizza Gallery</h1>
         <Row>
           {pizzaImages.map((pizza, index) => (
             <Col xs={12} sm={6} md={4} key={index} className="mb-4">
@@ -88,8 +90,6 @@ function Home() {
                 <Card.Body>
                   <Card.Title>{pizza.title}</Card.Title>
                   <Card.Text>{pizza.description}</Card.Text>
-                  <button type="button" className="btn btn-sm btn-outline-secondary mr-2" onClick={() => handleDelete(pizza.id)}>Delete</button>
-                  <button className="btn btn-sm btn-outline-secondary" onClick={() => navigate(`/UpdatePizza/${pizza.id}`)}>Update</button>
                 </Card.Body>
               </Card>
             </Col>
