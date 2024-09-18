@@ -15,7 +15,7 @@ function  Navbar(){
     <a className="nav-link navbar-dark bg-dark" href="/About">About</a>
   </li>
   <li className="nav-item">
-    <a className="nav-link navbar-dark bg-dark" href="/Contact">Conatct Us</a>
+    <a className="nav-link navbar-dark bg-dark" href="/Contact">Contact Us</a>
   </li>
 
   
